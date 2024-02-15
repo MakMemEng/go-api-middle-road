@@ -6,6 +6,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
+RUN apt update && apt install -y git-flow
+
 # COPY script-library/fish-debian.sh /tmp/fish-debian.sh
 
 # # [Optional] Uncomment this section to install additional OS packages.
