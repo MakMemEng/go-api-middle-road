@@ -8,25 +8,8 @@ import (
 
 // /hello のハンドラ
 func HelloHandler(w http.ResponseWriter, req *http.Request) {
-	/* 	// io.Writer interface型の変数
-		var w io.Writer
-
-		// Write(p []byte) (n int, err, error)を持つ構造体
-		type MyType1 struct{}
-		func (t MyType1) Write(p []byte) (n int, err, error) {
-			//
-		}
-		w = MyType1{} // 代入OK
-
-		// Write(p []byte) (n int, err, error)を持たない構造体
-		type MyType2 struct{}
-		w = MyType2{} // 代入NG(コンパイルエラー)
-	 */
-	 if req.Method == http.MethodGet {
-		 io.WriteString(w, "Hello, World!\n")
-	 } else {
-		http.Error(w, "Invalid method", http.StatusMethodNotAllowed)
-	 }
+	// gorilla/muxでは、受け付けていないメソッドのリクエストが来た場合には、ハンドラに処理を回す前にルータ自身で405エラーを返す
+	io.WriteString(w, "Hello, world!\n")
 }
 
 // /article のハンドラ
